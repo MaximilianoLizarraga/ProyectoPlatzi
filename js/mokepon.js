@@ -1,4 +1,23 @@
 //Variables globales de ataque y vida de cada uno
+const sectionSeleccionAtaque = document.getElementById("seleccionar-ataque")
+const sectionReinicio = document.getElementById("reiniciar")
+const botonMascotaJugador = document.getElementById("boton-mascota")
+const botonFuego = document.getElementById("boton-fuego")
+const botonAgua = document.getElementById("boton-agua")
+const botonTierra = document.getElementById("boton-tierra")
+const botonReiniciar = document.getElementById("boton-reiniciar")
+const sectionSeleccionMascota = document.getElementById("seleccionar-mascota")
+const inputHipodoge = document.getElementById ("hipodoge")
+const inputCapipepo = document.getElementById ("capipepo")
+const inputRatigueya = document.getElementById ("ratigueya")
+const spanMascotaJugador = document.getElementById ("mascota-jugador")
+const spanMascotaEnemigo = document.getElementById ("mascota-enemigo")
+const spanVidaJugador = document.getElementById("vida-jugador")
+const spanVidaEnemigo = document.getElementById("vida-enemigo")
+
+const sectionMensajes = document.getElementById("resultado")   
+const ataquesDelJugador = document.getElementById("ataquesDelJugador")
+const ataquesDelEnemigo = document.getElementById("ataquesDelEnemigo")
 
 let ataqueJugador
 let ataqueEnemigo
@@ -8,40 +27,21 @@ let vidaEnemigo = 3
 // funcion que indica que ataque selecciono el jugador
 
 function iniciarJuego () {
-    let sectionSeleccionAtaque = document.getElementById("seleccionar-ataque")
-    sectionSeleccionAtaque.style.display = "none"
-
-    let sectionReinicio = document.getElementById("reiniciar")
-    sectionReinicio.style.display = "none"
-
-    let botonMascotaJugador = document.getElementById("boton-mascota")
-    botonMascotaJugador.addEventListener("click", seleccionarMascotaJugador)
-
-    let botonFuego = document.getElementById("boton-fuego")
-    botonFuego.addEventListener("click", ataqueFuego)
-    let botonAgua = document.getElementById("boton-agua")
-    botonAgua.addEventListener("click", ataqueAgua)
-    let botonTierra = document.getElementById("boton-tierra")
-    botonTierra.addEventListener("click", ataqueTierra)
-
-    let botonReiniciar = document.getElementById("boton-reiniciar")
+    
+    sectionSeleccionAtaque.style.display = "none"    
+    sectionReinicio.style.display = "none"    
+    botonMascotaJugador.addEventListener("click", seleccionarMascotaJugador)    
+    botonFuego.addEventListener("click", ataqueFuego)   
+    botonAgua.addEventListener("click", ataqueAgua)    
+    botonTierra.addEventListener("click", ataqueTierra)    
     botonReiniciar.addEventListener("click", reiniciarJuego)
 }
 
 // funcion que indica que mascota selecciono el jugador
 
-function seleccionarMascotaJugador() {
-    let sectionSeleccionAtaque = document.getElementById("seleccionar-ataque")
-    sectionSeleccionAtaque.style.display = "flex"
-
-    let sectionSeleccionMascota = document.getElementById("seleccionar-mascota")
+function seleccionarMascotaJugador() {    
+    sectionSeleccionAtaque.style.display = "flex"    
     sectionSeleccionMascota.style.display = "none"
-
-    let inputHipodoge = document.getElementById ("hipodoge")
-    let inputCapipepo = document.getElementById ("capipepo")
-    let inputRatigueya = document.getElementById ("ratigueya")
-    let spanMascotaJugador = document.getElementById ("mascota-jugador")
-
 // if de cambio de texto donde indica que mascota seleccionaste en HTML
 
     if (inputHipodoge.checked)
@@ -63,8 +63,7 @@ function seleccionarMascotaJugador() {
 // funcion de aleatoriedad de seleccion de mascota del enemigo 
 
 function seleccionarMascotaEnemigo(){
-    let mascotaAleatorio = aleatorio(1,3)
-    let spanMascotaEnemigo = document.getElementById ("mascota-enemigo")
+    let mascotaAleatorio = aleatorio(1,3)    
 
 // similar a lo explicado arriba, if de cambio de texto en HTML de seleccion de mascota del enemigo
 
@@ -115,9 +114,7 @@ function ataqueAleatorioEnemigo(){
 
 // funcion de combate indica quien gana, empata o pierde de acuerdo a las selecciones de los dos jugadores. 
 
-function combate() {
-    let spanVidaJugador = document.getElementById("vida-jugador")
-    let spanVidaEnemigo = document.getElementById("vida-enemigo")
+function combate() {    
 
     if(ataqueEnemigo == ataqueJugador){
     crearMensaje("EMPATE 😅")
@@ -149,9 +146,7 @@ function revisarVidas(){
 // funcion de mensaje en HTML donde indica los ataques de ambos jugadores y su respectivo resultado, ya que trae la funcion de linea 101.
 
 function crearMensaje(resultado){
-    let sectionMensajes = document.getElementById("resultado")   
-    let ataquesDelJugador = document.getElementById("ataquesDelJugador")
-    let ataquesDelEnemigo = document.getElementById("ataquesDelEnemigo")
+   
     let nuevoAtaqueDelEnemigo = document.createElement("p")
     let nuevoAtaqueDelJugador = document.createElement("p")
 
@@ -164,20 +159,16 @@ function crearMensaje(resultado){
     ataquesDelEnemigo.appendChild(nuevoAtaqueDelEnemigo)
 }
 
-function crearMensajeFinal(resultadoFinal){
-    let sectionMensajes = document.getElementById("resultado")    
-    
+function crearMensajeFinal(resultadoFinal){   
 
     sectionMensajes.innerHTML = resultadoFinal 
-
-    let sectionReinicio = document.getElementById("reiniciar")
+    
     sectionReinicio.style.display = "block"
-
-    let botonFuego = document.getElementById("boton-fuego")
+    
     botonFuego.disabled = true
-    let botonAgua = document.getElementById("boton-agua")
+    
     botonAgua.disabled = true
-    let botonTierra = document.getElementById("boton-tierra")
+    
     botonTierra.disabled = true
 }
 
@@ -190,10 +181,9 @@ function reiniciarJuego(){
 
 
 // FUNCION DE ALEATORIEDAD
-
-    function aleatorio (min,max){
-        return Math.floor(Math.random()*(max-min+1)+min)
-    }
+function aleatorio (min,max){
+    return Math.floor(Math.random()*(max-min+1)+min)
+}
 
 // esto es para que el JS se ejecute una vez cargada la pagina.
 
