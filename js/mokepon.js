@@ -32,6 +32,7 @@ class Mokepon {
         this.nombre = nombre
         this.foto = foto
         this.vida = vida
+        this.ataques = []
     }
 }
 
@@ -40,8 +41,32 @@ let capipepo = new Mokepon("Capipepo", './images/chaco.jpg', 5)
 let ratigueya = new Mokepon("Ratigueya", './images/Emo, tronco de fuego y tierra.jpg', 5)
 
 mokepones.push(hipodoge, capipepo, ratigueya)
-console.log(mokepones)
 
+// Ataques de cada uno de los mokepones
+
+hipodoge.ataques.push(
+    { nombre: '💧',id: 'boton-agua' },
+    { nombre: '💧',id: 'boton-agua' },
+    { nombre: '💧',id: 'boton-agua' },
+    { nombre: '🔥',id: 'boton-fuego' },
+    { nombre: '🌱',id: 'boton-tierra' },
+)
+
+capipepo.ataques.push(
+    { nombre: '🌱',id: 'boton-tierra'},
+    { nombre: '🌱',id: 'boton-tierra'},
+    { nombre: '🌱',id: 'boton-tierra'},
+    { nombre: '🔥',id: 'boton-fuego' },    
+    { nombre: '💧',id: 'boton-agua' },
+)
+
+ratigueya.ataques.push(
+    { nombre: '🔥',id: 'boton-fuego' },
+    { nombre: '🔥',id: 'boton-fuego' },
+    { nombre: '🔥',id: 'boton-fuego' },
+    { nombre: '💧',id: 'boton-agua' },
+    { nombre: '🌱',id: 'boton-tierra' },
+)
 // funcion que indica que ataque selecciono el jugador
 
 function iniciarJuego () {
