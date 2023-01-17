@@ -19,10 +19,13 @@ const sectionMensajes = document.getElementById("resultado")
 const ataquesDelJugador = document.getElementById("ataquesDelJugador")
 const ataquesDelEnemigo = document.getElementById("ataquesDelEnemigo")
 
+let mokepones = []
 let ataqueJugador
 let ataqueEnemigo
 let vidaJugador = 3
 let vidaEnemigo = 3
+
+// CLASE y OBJETOS de la clase
 
 class Mokepon {
     constructor(nombre, foto, vida) {
@@ -36,6 +39,8 @@ let hipodoge = new Mokepon("Hipodoge",'./images/Alma.png', 5)
 let capipepo = new Mokepon("Capipepo", './images/chaco.jpg', 5)
 let ratigueya = new Mokepon("Ratigueya", './images/Emo, tronco de fuego y tierra.jpg', 5)
 
+mokepones.push(hipodoge, capipepo, ratigueya)
+console.log(mokepones)
 
 // funcion que indica que ataque selecciono el jugador
 
