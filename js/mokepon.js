@@ -6,12 +6,12 @@ const botonFuego = document.getElementById("boton-fuego")
 const botonAgua = document.getElementById("boton-agua")
 const botonTierra = document.getElementById("boton-tierra")
 const botonReiniciar = document.getElementById("boton-reiniciar")
+
 const sectionSeleccionMascota = document.getElementById("seleccionar-mascota")
-const inputHipodoge = document.getElementById ("hipodoge")
-const inputCapipepo = document.getElementById ("capipepo")
-const inputRatigueya = document.getElementById ("ratigueya")
 const spanMascotaJugador = document.getElementById ("mascota-jugador")
+
 const spanMascotaEnemigo = document.getElementById ("mascota-enemigo")
+
 const spanVidaJugador = document.getElementById("vida-jugador")
 const spanVidaEnemigo = document.getElementById("vida-enemigo")
 
@@ -26,7 +26,9 @@ let ataqueEnemigo
 let vidaJugador = 3
 let vidaEnemigo = 3
 let opcionDeMokepones
-
+let inputHipodoge
+let inputCapipepo
+let inputRatigueya
 
 // CLASE y OBJETOS de la clase
 
@@ -81,16 +83,21 @@ function iniciarJuego () {
 
     mokepones.forEach((mokepon) => {
         opcionDeMokepones = `
-        <input type="radio" name="mascota" id= ${mokepon.nombre}/> 
+        <input type="radio" name="mascota" id= ${mokepon.nombre} /> 
         <label class="tarjeta-de-mokepon" for=${mokepon.nombre}>
             <p>${mokepon.nombre}</p>
             <img class="imagenes" src=${mokepon.foto}>
         </label> 
         `
         contenedorTarjetas.innerHTML += opcionDeMokepones
+
+    inputHipodoge = document.getElementById ("Hipodoge")
+    inputCapipepo = document.getElementById ("Capipepo")
+    inputRatigueya = document.getElementById ("Ratigueya")
     })
 
     sectionReinicio.style.display = "none"    
+
     botonMascotaJugador.addEventListener("click", seleccionarMascotaJugador)    
     botonFuego.addEventListener("click", ataqueFuego)   
     botonAgua.addEventListener("click", ataqueAgua)    
