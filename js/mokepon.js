@@ -113,11 +113,11 @@ function seleccionarMascotaJugador() {
 // if de cambio de texto donde indica que mascota seleccionaste en HTML
 
     if (inputHipodoge.checked)
-        spanMascotaJugador.innerHTML = "Hipodoge"
+        spanMascotaJugador.innerHTML = inputHipodoge.id
     else if (inputCapipepo.checked)
-    spanMascotaJugador.innerHTML = "Capipepo"
+    spanMascotaJugador.innerHTML = inputCapipepo.id
     else if (inputRatigueya.checked)
-    spanMascotaJugador.innerHTML = "Ratigueya"
+    spanMascotaJugador.innerHTML = inputRatigueya.id
     else {
         alert("Tienes que seleccionar una mascota!")
     }
@@ -131,17 +131,10 @@ function seleccionarMascotaJugador() {
 // funcion de aleatoriedad de seleccion de mascota del enemigo 
 
 function seleccionarMascotaEnemigo(){
-    let mascotaAleatorio = aleatorio(1,3)    
+    let mascotaAleatorio = aleatorio(0,mokepones.length -1)    
 
-// similar a lo explicado arriba, if de cambio de texto en HTML de seleccion de mascota del enemigo
-
-        if(mascotaAleatorio == 1)
-            spanMascotaEnemigo.innerHTML = "Hipodoge"
-        else if (mascotaAleatorio == 2)
-            spanMascotaEnemigo.innerHTML = "Capipepo"
-        else if (mascotaAleatorio == 3)
-            spanMascotaEnemigo.innerHTML = "Ratigueya"
-    }
+    spanMascotaEnemigo.innerHTML = mokepones[mascotaAleatorio].nombre
+}
 
 // funciones de ataques de cada uno, cada una se activa con los eventlistener de los botones
 
