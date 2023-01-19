@@ -18,12 +18,15 @@ const spanVidaEnemigo = document.getElementById("vida-enemigo")
 const sectionMensajes = document.getElementById("resultado")   
 const ataquesDelJugador = document.getElementById("ataquesDelJugador")
 const ataquesDelEnemigo = document.getElementById("ataquesDelEnemigo")
+const contenedorTarjetas = document.getElementById("contenedorTarjetas")
 
 let mokepones = []
 let ataqueJugador
 let ataqueEnemigo
 let vidaJugador = 3
 let vidaEnemigo = 3
+let opcionDeMokepones
+
 
 // CLASE y OBJETOS de la clase
 
@@ -38,9 +41,9 @@ class Mokepon {
 
 let hipodoge = new Mokepon("Hipodoge",'./images/Alma.png', 5)
 let capipepo = new Mokepon("Capipepo", './images/chaco.jpg', 5)
-let ratigueya = new Mokepon("Ratigueya", './images/Emo, tronco de fuego y tierra.jpg', 5)
+let ratigueya = new Mokepon("Ratigueya", './images/Emo.jpg', 5)
 
-mokepones.push(hipodoge, capipepo, ratigueya)
+
 
 // Ataques de cada uno de los mokepones
 
@@ -67,11 +70,26 @@ ratigueya.ataques.push(
     { nombre: '💧',id: 'boton-agua' },
     { nombre: '🌱',id: 'boton-tierra' },
 )
+
+mokepones.push(hipodoge, capipepo, ratigueya)
+
 // funcion que indica que ataque selecciono el jugador
 
 function iniciarJuego () {
     
     sectionSeleccionAtaque.style.display = "none"    
+
+    mokepones.forEach((mokepon) => {
+        opcionDeMokepones = `
+        <input type="radio" name="mascota" id= ${mokepon.nombre}/> 
+        <label class="tarjeta-de-mokepon" for=${mokepon.nombre}>
+            <p>${mokepon.nombre}</p>
+            <img class="imagenes" src=${mokepon.foto}>
+        </label> 
+        `
+        contenedorTarjetas.innerHTML += opcionDeMokepones
+    })
+
     sectionReinicio.style.display = "none"    
     botonMascotaJugador.addEventListener("click", seleccionarMascotaJugador)    
     botonFuego.addEventListener("click", ataqueFuego)   
