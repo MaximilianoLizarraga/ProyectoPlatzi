@@ -35,6 +35,8 @@ let botonFuego
 let botonAgua 
 let botonTierra 
 let botones = []
+let indexAtaqueJugador
+let indexAtaqueEnemigo
 
 
 
@@ -212,14 +214,28 @@ function ataqueAleatorioEnemigo(){
         ataqueEnemigo.push("TIERRA")
     }
     console.log(ataqueEnemigo)
-// funcion combate explicada mas abajo
-
-    combate()
+    iniciarPelea()
 }
 
+function iniciarPelea(){
+    if (ataqueJugador.length === 5)
+    combate()
+}
 // funcion de combate indica quien gana, empata o pierde de acuerdo a las selecciones de los dos jugadores. 
 
+function indexAmbosOponentes(jugador, enemigo){
+    indexAtaqueJugador = ataqueJugador[jugador]
+    indexAtaqueEnemigo = ataqueEnemigo [enemigo]
+}
+
 function combate() {    
+    for (let i = 0; i < ataqueJugador.length; i++) {
+        if(ataqueJugador[i] === ataqueEnemigo[i]) {
+            indexAmbosOponentes(i, i)
+            crearMensaje("EMPATE 😅")
+        }
+        
+    }
 
     if(ataqueEnemigo == ataqueJugador){
     crearMensaje("EMPATE 😅")
@@ -256,8 +272,8 @@ function crearMensaje(resultado){
     let nuevoAtaqueDelJugador = document.createElement("p")
 
     sectionMensajes.innerHTML = resultado
-    nuevoAtaqueDelJugador.innerHTML = ataqueJugador
-    nuevoAtaqueDelEnemigo.innerHTML = ataqueEnemigo
+    nuevoAtaqueDelJugador.innerHTML = indexAtaqueJugador
+    nuevoAtaqueDelEnemigo.innerHTML = indexAtaqueEnemigo
 
     
     ataquesDelJugador.appendChild(nuevoAtaqueDelJugador)
