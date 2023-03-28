@@ -24,6 +24,8 @@ let ataqueJugador = []
 let ataqueEnemigo = []
 let vidaJugador = 3
 let vidaEnemigo = 3
+let victoriasJugador = 0
+let victoriasEnemigo = 0
 let opcionDeMokepones
 let inputHipodoge
 let inputCapipepo
@@ -230,38 +232,57 @@ function indexAmbosOponentes(jugador, enemigo){
 
 function combate() {    
     for (let i = 0; i < ataqueJugador.length; i++) {
-        if(ataqueJugador[i] === ataqueEnemigo[i]) {
+        if(ataqueJugador[i] === ataqueEnemigo[i]) 
+        {
             indexAmbosOponentes(i, i)
             crearMensaje("EMPATE 😅")
+        }  
+        else if (ataqueJugador[i] === "FUEGO" && ataqueEnemigo[i] === "TIERRA")
+        { 
+            indexAmbosOponentes(i, i)
+            crearMensaje("GANASTEEEE😁") 
+            victoriasJugador++
+            spanVidaJugador.innerHTML = victoriasJugador 
+        }
+        else if (ataqueJugador[i] === "AGUA" && ataqueEnemigo[i]  === "FUEGO")
+        {
+            indexAmbosOponentes(i, i)
+            crearMensaje("GANASTEEEE😁") 
+            victoriasJugador++
+            spanVidaJugador.innerHTML = victoriasJugador 
+        }
+        else if (ataqueJugador[i]  === "TIERRA" && ataqueEnemigo[i]  === "AGUA") 
+        {
+            indexAmbosOponentes(i, i)
+            crearMensaje("GANASTEEEE😁") 
+            victoriasJugador++
+            spanVidaJugador.innerHTML = victoriasJugador 
+        }
+        else 
+        {
+            indexAmbosOponentes(i, i)
+            crearMensaje("PERDISTE 😭")
+            victoriasEnemigo++
+            spanVidaEnemigo.innerHTML = victoriasEnemigo
         }
         
-    }
+    }// funcion para chequear vidas y saber quien gano y perdio
 
-    if(ataqueEnemigo == ataqueJugador){
-    crearMensaje("EMPATE 😅")
-}else if((ataqueJugador == "FUEGO" && ataqueEnemigo == "TIERRA") || (ataqueJugador == "AGUA" && ataqueEnemigo == "FUEGO") || (ataqueJugador == "TIERRA" && ataqueEnemigo == "AGUA")){
-    crearMensaje("GANASTEEEE😁") 
-    vidaEnemigo--
-    spanVidaEnemigo.innerHTML = vidaEnemigo    
-}else{
-    crearMensaje("PERDISTE 😭")
-    vidaJugador--
-    spanVidaJugador.innerHTML = vidaJugador
-   
-} // funcion para chequear vidas y saber quien gano y perdio
+    revisarVidas()
 
-revisarVidas()
-
-};
+} 
 
 // funcion revisar vidas.
 
 function revisarVidas(){
-    if (vidaEnemigo === 0)
-    crearMensajeFinal("GANASTE EL JUEGOOOOO")
-    else if(vidaJugador === 0)
-    crearMensajeFinal("NOOOOOO PERDISTE 😪")
-}
+    if (victoriasJugador === victoriasEnemigo)
+        crearMensajeFinal("Esto fue un EMPATE! 😮");
+    else if(victoriasJugador > victoriasEnemigo)
+        crearMensajeFinal("GANASTE EL JUEGO!!! 😎");
+    else {
+        crearMensajeFinal("Perdiste el juego!! 😪")
+    } 
+} 
 
 
 // funcion de mensaje en HTML donde indica los ataques de ambos jugadores y su respectivo resultado, ya que trae la funcion de linea 101.
