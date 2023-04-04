@@ -174,15 +174,19 @@ function secuenciaAtaque() {
                 ataqueJugador.push("FUEGO")
                 console.log(ataqueJugador)
                 boton.style.background = "#112f58"
+                boton.disabled = true
             } else if (e.target.textContent === "💧") {
                 ataqueJugador.push("AGUA")
                 console.log(ataqueJugador)
                 boton.style.background = "#112f58"
+                boton.disabled = true
             }else {
                 ataqueJugador.push("TIERRA")
                 console.log(ataqueJugador)
                 boton.style.background = "#112f58"
+                boton.disabled = true
             }
+
             ataqueAleatorioEnemigo()
         })
 
@@ -233,38 +237,38 @@ function indexAmbosOponentes(jugador, enemigo){
 function combate() {    
     for (let i = 0; i < ataqueJugador.length; i++) {
         if(ataqueJugador[i] === ataqueEnemigo[i]) 
-        {
-            indexAmbosOponentes(i, i)
-            crearMensaje("EMPATE 😅")
-        }  
+            {
+                indexAmbosOponentes(i, i)
+                crearMensaje("EMPATE 😅")
+            }  
         else if (ataqueJugador[i] === "FUEGO" && ataqueEnemigo[i] === "TIERRA")
-        { 
-            indexAmbosOponentes(i, i)
-            crearMensaje("GANASTEEEE😁") 
-            victoriasJugador++
-            spanVidaJugador.innerHTML = victoriasJugador 
-        }
+            { 
+                indexAmbosOponentes(i, i)
+                crearMensaje("GANASTEEEE😁") 
+                victoriasJugador++
+                spanVidaJugador.innerHTML = victoriasJugador 
+            }
         else if (ataqueJugador[i] === "AGUA" && ataqueEnemigo[i]  === "FUEGO")
-        {
-            indexAmbosOponentes(i, i)
-            crearMensaje("GANASTEEEE😁") 
-            victoriasJugador++
-            spanVidaJugador.innerHTML = victoriasJugador 
-        }
+            {
+                indexAmbosOponentes(i, i)
+                crearMensaje("GANASTEEEE😁") 
+                victoriasJugador++
+                spanVidaJugador.innerHTML = victoriasJugador 
+            }
         else if (ataqueJugador[i]  === "TIERRA" && ataqueEnemigo[i]  === "AGUA") 
-        {
-            indexAmbosOponentes(i, i)
-            crearMensaje("GANASTEEEE😁") 
-            victoriasJugador++
-            spanVidaJugador.innerHTML = victoriasJugador 
-        }
+            {
+                indexAmbosOponentes(i, i)
+                crearMensaje("GANASTEEEE😁") 
+                victoriasJugador++
+                spanVidaJugador.innerHTML = victoriasJugador 
+            }
         else 
-        {
-            indexAmbosOponentes(i, i)
-            crearMensaje("PERDISTE 😭")
-            victoriasEnemigo++
-            spanVidaEnemigo.innerHTML = victoriasEnemigo
-        }
+            {
+                indexAmbosOponentes(i, i)
+                crearMensaje("PERDISTE 😭")
+                victoriasEnemigo++
+                spanVidaEnemigo.innerHTML = victoriasEnemigo
+            }
         
     }// funcion para chequear vidas y saber quien gano y perdio
 
@@ -306,12 +310,6 @@ function crearMensajeFinal(resultadoFinal){
     sectionMensajes.innerHTML = resultadoFinal 
     
     sectionReinicio.style.display = "block"
-    
-    botonFuego.disabled = true
-    
-    botonAgua.disabled = true
-    
-    botonTierra.disabled = true
 }
 
 
