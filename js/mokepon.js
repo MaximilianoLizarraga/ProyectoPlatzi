@@ -46,6 +46,7 @@ let lienzo = mapa.getContext("2d")
 
 
 
+
 // CLASE y OBJETOS de la clase
 
 class Mokepon {
@@ -54,6 +55,12 @@ class Mokepon {
         this.foto = foto
         this.vida = vida
         this.ataques = []
+        this.x = 20
+        this.y = 30
+        this.ancho = 80
+        this.alto = 80
+        this.mapaFoto = new Image()
+        this.mapaFoto.src = foto
     }
 }
 
@@ -125,15 +132,8 @@ function seleccionarMascotaJugador() {
     /* sectionSeleccionAtaque.style.display = "flex"  */   
     sectionSeleccionMascota.style.display = "none"
     sectionVerMapa.style.display ="flex"
-    let imagenDeCapipepo = new Image()
-    imagenDeCapipepo.src = capipepo.foto
-    lienzo.drawImage(
-        imagenDeCapipepo,
-        20,
-        40,
-        100,
-        100
-    )
+
+
     /* el orden es X, Y , Ancho y Alto. Se modifica a Draw Image porque para cargar imagen se necesita otra funcion el orden de parametros de tamaño es el mismo */
     /* lienzo.fillRect(5,15,20,40) */
 
@@ -334,6 +334,40 @@ function crearMensajeFinal(resultadoFinal){
 
 function reiniciarJuego(){
     location.reload()
+}
+
+
+function pintarPersonaje () {
+    lienzo.clearRect(0,0, mapa.width, mapa.height)
+    lienzo.drawImage(
+        capipepo.mapaFoto,
+        capipepo.x,
+        capipepo.y,
+        capipepo.ancho,
+        capipepo.alto,
+    )
+}
+
+function moverCapipepo() {
+    
+    botonDerecho = document.getElementById("moverDerecha")
+    botonAbajo = document.getElementById("moverAbajo")
+    botonIzquierda = document.getElementById("moverIzquierda")
+    botonArriba = document.getElementById("moverArriba")
+    botonesMovimiento = [botonDerecho,botonAbajo,botonIzquierda,botonArriba]
+
+    botonesMovimiento.forEach((boton) => {
+    boton.addEventListener("click", (e) => {
+        if (e.target.textContent === "Derecha") {
+            capipepo.x = capipepo.x + 5
+} else if (e.target.textContent === "Abajo") {
+    capipepo.y = capipepo.y + 5
+} else if (e.target.textContent === "Izquierda") {
+    capipepo.x = capipepo.x - 5 
+} else { capipepo.y = capipepo.y - 5 }
+    pintarPersonaje() 
+     })
+})
 }
 
 
