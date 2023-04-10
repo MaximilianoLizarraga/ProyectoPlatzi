@@ -19,6 +19,9 @@ const ataquesDelEnemigo = document.getElementById("ataquesDelEnemigo")
 const contenedorTarjetas = document.getElementById("contenedorTarjetas")
 const contenedorAtaques = document.getElementById("contenedorAtaques")
 
+const sectionVerMapa = document.getElementById("ver-mapa")
+const mapa = document.getElementById("mapa")
+
 let mokepones = []
 let ataqueJugador = []
 let ataqueEnemigo = []
@@ -39,7 +42,7 @@ let botonTierra
 let botones = []
 let indexAtaqueJugador
 let indexAtaqueEnemigo
-
+let lienzo = mapa.getContext("2d")
 
 
 
@@ -93,6 +96,7 @@ mokepones.push(hipodoge, capipepo, ratigueya)
 function iniciarJuego () {
     
     sectionSeleccionAtaque.style.display = "none"    
+    sectionVerMapa.style.display ="none"
 
     mokepones.forEach((mokepon) => {
         opcionDeMokepones = `
@@ -118,8 +122,21 @@ function iniciarJuego () {
 // funcion que indica que mascota selecciono el jugador
 
 function seleccionarMascotaJugador() {    
-    sectionSeleccionAtaque.style.display = "flex"    
+    /* sectionSeleccionAtaque.style.display = "flex"  */   
     sectionSeleccionMascota.style.display = "none"
+    sectionVerMapa.style.display ="flex"
+    let imagenDeCapipepo = new Image()
+    imagenDeCapipepo.src = capipepo.foto
+    lienzo.drawImage(
+        imagenDeCapipepo,
+        20,
+        40,
+        100,
+        100
+    )
+    /* el orden es X, Y , Ancho y Alto. Se modifica a Draw Image porque para cargar imagen se necesita otra funcion el orden de parametros de tamaño es el mismo */
+    /* lienzo.fillRect(5,15,20,40) */
+
 // if de cambio de texto donde indica que mascota seleccionaste en HTML
 
     if (inputHipodoge.checked) {
