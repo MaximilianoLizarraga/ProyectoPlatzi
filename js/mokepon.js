@@ -349,25 +349,26 @@ function pintarPersonaje () {
 }
 
 function moverCapipepo() {
-    
+
     botonDerecho = document.getElementById("moverDerecha")
     botonAbajo = document.getElementById("moverAbajo")
     botonIzquierda = document.getElementById("moverIzquierda")
     botonArriba = document.getElementById("moverArriba")
-    botonesMovimiento = [botonDerecho,botonAbajo,botonIzquierda,botonArriba]
+    botonesMovimiento = [botonDerecho, botonAbajo, botonIzquierda, botonArriba]
 
     botonesMovimiento.forEach((boton) => {
-    boton.addEventListener("click", (e) => {
-        if (e.target.textContent === "Derecha") {
-            capipepo.x = capipepo.x + 5
-} else if (e.target.textContent === "Abajo") {
-    capipepo.y = capipepo.y + 5
-} else if (e.target.textContent === "Izquierda") {
-    capipepo.x = capipepo.x - 5 
-} else { capipepo.y = capipepo.y - 5 }
-    pintarPersonaje() 
-     })
-})
+        boton.addEventListener("click", (e) => {
+            if (e.target.id === "moverDerecha") {
+                capipepo.x = capipepo.x + 5
+                console.log(e)
+            } else if (e.target.id === "moverAbajo") {
+                capipepo.y = capipepo.y + 5
+            } else if (e.target.id=== "moverIzquierda") {
+                capipepo.x = capipepo.x - 5
+            } else { capipepo.y = capipepo.y - 5 }
+            pintarPersonaje()
+        })
+    })
 }
 
 

@@ -119,6 +119,10 @@ input:checked + label {
     border: 2px solid white;
 }
 
+#teclasMov {
+    display: flex;
+}
+
 
 @media (max-width: 360px){
     .tarjetas, .tarjetas-ataques{
