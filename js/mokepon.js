@@ -136,7 +136,7 @@ function seleccionarMascotaJugador() {
     sectionSeleccionMascota.style.display = "none"
     sectionVerMapa.style.display = "flex"
     intervalo = setInterval(pintarPersonaje, 50)
-
+    moverCapipepo()
 
     /* el orden es X, Y , Ancho y Alto. Se modifica a Draw Image porque para cargar imagen se necesita otra funcion el orden de parametros de tamaño es el mismo */
     /* lienzo.fillRect(5,15,20,40) */
@@ -356,16 +356,20 @@ function moverCapipepo() {
     botonIzquierda = document.getElementById("moverIzquierda")
     botonArriba = document.getElementById("moverArriba")
     botonesMovimiento = [botonDerecho, botonAbajo, botonIzquierda, botonArriba]
-
+    
     botonesMovimiento.forEach((boton) => {
         boton.addEventListener("mousedown", (e) => {
             if (e.target.id === "moverDerecha") {
                 capipepo.velocidadX = 5
+                botonDerecho.style.background = "#F0FC00" 
             } else if (e.target.id === "moverAbajo") {
                 capipepo.velocidadY = 5
+                botonAbajo.style.background = "#F0FC00" 
             } else if (e.target.id === "moverIzquierda") {
                 capipepo.velocidadX = -5
-            } else { capipepo.velocidadY = -5 }
+                botonIzquierda.style.background = "#F0FC00" 
+            } else { capipepo.velocidadY = -5 
+            botonArriba.style.background = "#F0FC00" }
             pintarPersonaje()
         })
     })
@@ -374,6 +378,10 @@ function moverCapipepo() {
 function detenerMovimiento() {
     capipepo.velocidadX = 0
     capipepo.velocidadY = 0  
+    botonDerecho.style.background = "#FFFFFF"
+    botonAbajo.style.background = "#FFFFFF"
+    botonIzquierda.style.background = "#FFFFFF"
+    botonArriba.style.background = "#FFFFFF"
 }
 
 // FUNCION DE ALEATORIEDAD
