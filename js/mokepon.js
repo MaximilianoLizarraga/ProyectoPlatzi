@@ -135,9 +135,8 @@ function seleccionarMascotaJugador() {
     /* sectionSeleccionAtaque.style.display = "flex"  */
     sectionSeleccionMascota.style.display = "none"
     sectionVerMapa.style.display = "flex"
-    intervalo = setInterval(pintarPersonaje, 50)
-    moverCapipepo()
-
+    iniciarMapa()
+    
     /* el orden es X, Y , Ancho y Alto. Se modifica a Draw Image porque para cargar imagen se necesita otra funcion el orden de parametros de tamaño es el mismo */
     /* lienzo.fillRect(5,15,20,40) */
 
@@ -375,6 +374,28 @@ function moverCapipepo() {
     })
 }
 
+function sePresionoUnaTecla(event) {
+    if (event.key === "ArrowRight") {
+        capipepo.velocidadX = 5
+        botonDerecho.style.background = "#F0FC00"
+    }
+    else if (event.key === "ArrowDown") {
+        capipepo.velocidadY = 5
+        botonAbajo.style.background = "#F0FC00"
+    }
+    else if (event.key === "ArrowLeft") {
+        capipepo.velocidadX = -5
+        botonIzquierda.style.background = "#F0FC00"
+    }
+    else if (event.key === "ArrowUp") {
+        capipepo.velocidadY = -5
+        botonArriba.style.background = "#F0FC00"
+    }
+}
+
+
+
+
 function detenerMovimiento() {
     capipepo.velocidadX = 0
     capipepo.velocidadY = 0  
@@ -382,6 +403,13 @@ function detenerMovimiento() {
     botonAbajo.style.background = "#FFFFFF"
     botonIzquierda.style.background = "#FFFFFF"
     botonArriba.style.background = "#FFFFFF"
+}
+
+function iniciarMapa() {
+    intervalo = setInterval(pintarPersonaje, 50)
+    moverCapipepo()
+    window.addEventListener("keydown", sePresionoUnaTecla)
+    window.addEventListener("keyup", detenerMovimiento)
 }
 
 // FUNCION DE ALEATORIEDAD
