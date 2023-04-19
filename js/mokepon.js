@@ -34,6 +34,7 @@ let inputHipodoge
 let inputCapipepo
 let inputRatigueya
 let mascotaJugador
+let mascotaJugadorObjeto
 let ataquesMokepon
 let ataquesMokeponEnemigo
 let botonFuego
@@ -44,7 +45,8 @@ let indexAtaqueJugador
 let indexAtaqueEnemigo
 let lienzo = mapa.getContext("2d")
 let intervalo
-
+let mapaBackground = new Image()
+mapaBackground.src = './images/mokemap.png'
 
 
 
@@ -134,9 +136,7 @@ function iniciarJuego() {
 function seleccionarMascotaJugador() {
     /* sectionSeleccionAtaque.style.display = "flex"  */
     sectionSeleccionMascota.style.display = "none"
-    sectionVerMapa.style.display = "flex"
-    iniciarMapa()
-    
+
     /* el orden es X, Y , Ancho y Alto. Se modifica a Draw Image porque para cargar imagen se necesita otra funcion el orden de parametros de tamaño es el mismo */
     /* lienzo.fillRect(5,15,20,40) */
 
@@ -161,7 +161,8 @@ function seleccionarMascotaJugador() {
     extraerAtaques(mascotaJugador)
 
     // funcion explicada mas abajo
-
+sectionVerMapa.style.display = "flex"
+    iniciarMapa()
     seleccionarMascotaEnemigo()
 
 }
@@ -335,21 +336,29 @@ function reiniciarJuego() {
 }
 
 
-function pintarPersonaje() {
-    capipepo.x = capipepo.x + capipepo.velocidadX
-    capipepo.y = capipepo.y + capipepo.velocidadY
+function pintarCanvas() {
+    mascotaJugadorObjeto
+    mascotaJugadorObjeto.x = mascotaJugadorObjeto.x + mascotaJugadorObjeto.velocidadX
+    mascotaJugadorObjeto.y = mascotaJugadorObjeto.y + mascotaJugadorObjeto.velocidadY
     lienzo.clearRect(0, 0, mapa.width, mapa.height)
     lienzo.drawImage(
-        capipepo.mapaFoto,
-        capipepo.x,
-        capipepo.y,
-        capipepo.ancho,
-        capipepo.alto,
+        mapaBackground,
+        0,
+        0,
+        mapa.width,
+        mapa.height,
+    )
+    lienzo.drawImage(
+        mascotaJugadorObjeto.mapaFoto,
+        mascotaJugadorObjeto.x,
+        mascotaJugadorObjeto.y,
+        mascotaJugadorObjeto.ancho,
+        mascotaJugadorObjeto.alto,
     )
 }
 
-function moverCapipepo() {
-
+function moverMiMokepon() {
+    mascotaJugadorObjeto
     botonDerecho = document.getElementById("moverDerecha")
     botonAbajo = document.getElementById("moverAbajo")
     botonIzquierda = document.getElementById("moverIzquierda")
@@ -359,36 +368,38 @@ function moverCapipepo() {
     botonesMovimiento.forEach((boton) => {
         boton.addEventListener("mousedown", (e) => {
             if (e.target.id === "moverDerecha") {
-                capipepo.velocidadX = 5
+                mascotaJugadorObjeto.velocidadX = 5
                 botonDerecho.style.background = "#F0FC00" 
             } else if (e.target.id === "moverAbajo") {
-                capipepo.velocidadY = 5
+                mascotaJugadorObjeto.velocidadY = 5
                 botonAbajo.style.background = "#F0FC00" 
             } else if (e.target.id === "moverIzquierda") {
-                capipepo.velocidadX = -5
+                mascotaJugadorObjeto.velocidadX = -5
                 botonIzquierda.style.background = "#F0FC00" 
-            } else { capipepo.velocidadY = -5 
+            } else { mascotaJugadorObjeto.velocidadY = -5 
             botonArriba.style.background = "#F0FC00" }
-            pintarPersonaje()
+            pintarCanvas()
         })
     })
 }
 
 function sePresionoUnaTecla(event) {
+    mascotaJugadorObjeto
+
     if (event.key === "ArrowRight") {
-        capipepo.velocidadX = 5
+        mascotaJugadorObjeto.velocidadX = 5
         botonDerecho.style.background = "#F0FC00"
     }
     else if (event.key === "ArrowDown") {
-        capipepo.velocidadY = 5
+        mascotaJugadorObjeto.velocidadY = 5
         botonAbajo.style.background = "#F0FC00"
     }
     else if (event.key === "ArrowLeft") {
-        capipepo.velocidadX = -5
+        mascotaJugadorObjeto.velocidadX = -5
         botonIzquierda.style.background = "#F0FC00"
     }
     else if (event.key === "ArrowUp") {
-        capipepo.velocidadY = -5
+        mascotaJugadorObjeto.velocidadY = -5
         botonArriba.style.background = "#F0FC00"
     }
 }
@@ -397,8 +408,9 @@ function sePresionoUnaTecla(event) {
 
 
 function detenerMovimiento() {
-    capipepo.velocidadX = 0
-    capipepo.velocidadY = 0  
+    mascotaJugadorObjeto
+    mascotaJugadorObjeto.velocidadX = 0
+    mascotaJugadorObjeto.velocidadY = 0  
     botonDerecho.style.background = "#FFFFFF"
     botonAbajo.style.background = "#FFFFFF"
     botonIzquierda.style.background = "#FFFFFF"
@@ -406,11 +418,24 @@ function detenerMovimiento() {
 }
 
 function iniciarMapa() {
-    intervalo = setInterval(pintarPersonaje, 50)
-    moverCapipepo()
+    mapa.width = 800
+    mapa.height = 600
+    mascotaJugadorObjeto = obtenerObjetoMascota()
+    intervalo = setInterval(pintarCanvas, 50)
+    moverMiMokepon()
     window.addEventListener("keydown", sePresionoUnaTecla)
     window.addEventListener("keyup", detenerMovimiento)
 }
+
+function obtenerObjetoMascota(){
+    for (let i = 0; i < mokepones.length; i++)
+        if (mascotaJugador == mokepones[i].nombre) {
+            return mokepones[i]
+        }
+
+    mostrarAtaques(ataques)
+}
+
 
 // FUNCION DE ALEATORIEDAD
 function aleatorio(min, max) {
