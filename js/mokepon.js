@@ -79,11 +79,11 @@ class Mokepon {
 }
 
 let hipodoge = new Mokepon("Hipodoge", './images/Alma.png', 5, './images/Alma.png')
-let capipepo = new Mokepon("Capipepo", './images/chaco.jpg', 5,'./images/chaco.jpg')
+let capipepo = new Mokepon("Capipepo", './images/chaco.jpg', 5, './images/chaco.jpg')
 let ratigueya = new Mokepon("Ratigueya", './images/Emo.jpg', 5, './images/Emo.jpg')
 
 let hipodogeEnemigo = new Mokepon("Hipodoge", './images/Alma.png', 5, './images/Alma.png', 400, 120)
-let capipepoEnemigo = new Mokepon("Capipepo", './images/chaco.jpg', 5,'./images/chaco.jpg', 120, 450)
+let capipepoEnemigo = new Mokepon("Capipepo", './images/chaco.jpg', 5, './images/chaco.jpg', 120, 450)
 let ratigueyaEnemigo = new Mokepon("Ratigueya", './images/Emo.jpg', 5, './images/Emo.jpg', 700, 470)
 
 
