@@ -53,25 +53,38 @@ mapaBackground.src = './images/mokemap.png'
 // CLASE y OBJETOS de la clase
 
 class Mokepon {
-    constructor(nombre, foto, vida) {
+    constructor(nombre, foto, vida, fotoMapa, x = 10, y = 10) {
         this.nombre = nombre
         this.foto = foto
         this.vida = vida
         this.ataques = []
-        this.x = 20
-        this.y = 30
+        this.x = x
+        this.y = y
         this.ancho = 80
         this.alto = 80
         this.mapaFoto = new Image()
-        this.mapaFoto.src = foto
+        this.mapaFoto.src = fotoMapa
         this.velocidadX = 0
         this.velocidadY = 0
     }
+    pintarMokepon() {
+        lienzo.drawImage(
+            this.mapaFoto,
+            this.x,
+            this.y,
+            this.ancho,
+            this.alto,
+        )
+    }
 }
 
-let hipodoge = new Mokepon("Hipodoge", './images/Alma.png', 5)
-let capipepo = new Mokepon("Capipepo", './images/chaco.jpg', 5)
-let ratigueya = new Mokepon("Ratigueya", './images/Emo.jpg', 5)
+let hipodoge = new Mokepon("Hipodoge", './images/Alma.png', 5, './images/Alma.png')
+let capipepo = new Mokepon("Capipepo", './images/chaco.jpg', 5,'./images/chaco.jpg')
+let ratigueya = new Mokepon("Ratigueya", './images/Emo.jpg', 5, './images/Emo.jpg')
+
+let hipodogeEnemigo = new Mokepon("Hipodoge", './images/Alma.png', 5, './images/Alma.png', 400, 120)
+let capipepoEnemigo = new Mokepon("Capipepo", './images/chaco.jpg', 5,'./images/chaco.jpg', 120, 450)
+let ratigueyaEnemigo = new Mokepon("Ratigueya", './images/Emo.jpg', 5, './images/Emo.jpg', 700, 470)
 
 
 
@@ -161,7 +174,7 @@ function seleccionarMascotaJugador() {
     extraerAtaques(mascotaJugador)
 
     // funcion explicada mas abajo
-sectionVerMapa.style.display = "flex"
+    sectionVerMapa.style.display = "flex"
     iniciarMapa()
     seleccionarMascotaEnemigo()
 
@@ -348,13 +361,10 @@ function pintarCanvas() {
         mapa.width,
         mapa.height,
     )
-    lienzo.drawImage(
-        mascotaJugadorObjeto.mapaFoto,
-        mascotaJugadorObjeto.x,
-        mascotaJugadorObjeto.y,
-        mascotaJugadorObjeto.ancho,
-        mascotaJugadorObjeto.alto,
-    )
+    mascotaJugadorObjeto.pintarMokepon()
+    hipodogeEnemigo.pintarMokepon()
+    capipepoEnemigo.pintarMokepon()
+    ratigueyaEnemigo.pintarMokepon()
 }
 
 function moverMiMokepon() {
@@ -364,20 +374,22 @@ function moverMiMokepon() {
     botonIzquierda = document.getElementById("moverIzquierda")
     botonArriba = document.getElementById("moverArriba")
     botonesMovimiento = [botonDerecho, botonAbajo, botonIzquierda, botonArriba]
-    
+
     botonesMovimiento.forEach((boton) => {
         boton.addEventListener("mousedown", (e) => {
             if (e.target.id === "moverDerecha") {
                 mascotaJugadorObjeto.velocidadX = 5
-                botonDerecho.style.background = "#F0FC00" 
+                botonDerecho.style.background = "#F0FC00"
             } else if (e.target.id === "moverAbajo") {
                 mascotaJugadorObjeto.velocidadY = 5
-                botonAbajo.style.background = "#F0FC00" 
+                botonAbajo.style.background = "#F0FC00"
             } else if (e.target.id === "moverIzquierda") {
                 mascotaJugadorObjeto.velocidadX = -5
-                botonIzquierda.style.background = "#F0FC00" 
-            } else { mascotaJugadorObjeto.velocidadY = -5 
-            botonArriba.style.background = "#F0FC00" }
+                botonIzquierda.style.background = "#F0FC00"
+            } else {
+                mascotaJugadorObjeto.velocidadY = -5
+                botonArriba.style.background = "#F0FC00"
+            }
             pintarCanvas()
         })
     })
@@ -410,7 +422,7 @@ function sePresionoUnaTecla(event) {
 function detenerMovimiento() {
     mascotaJugadorObjeto
     mascotaJugadorObjeto.velocidadX = 0
-    mascotaJugadorObjeto.velocidadY = 0  
+    mascotaJugadorObjeto.velocidadY = 0
     botonDerecho.style.background = "#FFFFFF"
     botonAbajo.style.background = "#FFFFFF"
     botonIzquierda.style.background = "#FFFFFF"
@@ -427,7 +439,7 @@ function iniciarMapa() {
     window.addEventListener("keyup", detenerMovimiento)
 }
 
-function obtenerObjetoMascota(){
+function obtenerObjetoMascota() {
     for (let i = 0; i < mokepones.length; i++)
         if (mascotaJugador == mokepones[i].nombre) {
             return mokepones[i]
