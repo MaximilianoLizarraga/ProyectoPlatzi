@@ -47,21 +47,32 @@ let lienzo = mapa.getContext("2d")
 let intervalo
 let mapaBackground = new Image()
 mapaBackground.src = './images/mokemap.png'
+let alturaQueBuscamos
+let anchoDelMapa = window.innerWidth - 50
+const anchoMaximoDelMapa = 2000
+
+if (anchoDelMapa > anchoMaximoDelMapa) {
+    anchoDelMapa = anchoMaximoDelMapa - 50
+}
+
+alturaQueBuscamos = anchoDelMapa * 200 / 400
+mapa.width = anchoDelMapa
+mapa.height = alturaQueBuscamos
 
 
 
 // CLASE y OBJETOS de la clase
 
 class Mokepon {
-    constructor(nombre, foto, vida, fotoMapa, x = 10, y = 10) {
+    constructor(nombre, foto, vida, fotoMapa) {
         this.nombre = nombre
         this.foto = foto
         this.vida = vida
         this.ataques = []
-        this.x = x
-        this.y = y
         this.ancho = 80
         this.alto = 80
+        this.x = aleatorio(0, mapa.width - this.ancho)
+        this.y = aleatorio(0, mapa.height - this.alto)
         this.mapaFoto = new Image()
         this.mapaFoto.src = fotoMapa
         this.velocidadX = 0
@@ -82,9 +93,9 @@ let hipodoge = new Mokepon("Hipodoge", './images/Alma.png', 5, './images/Alma.pn
 let capipepo = new Mokepon("Capipepo", './images/chaco.jpg', 5, './images/chaco.jpg')
 let ratigueya = new Mokepon("Ratigueya", './images/Emo.jpg', 5, './images/Emo.jpg')
 
-let hipodogeEnemigo = new Mokepon("Hipodoge", './images/Alma.png', 5, './images/Alma.png', 400, 120)
-let capipepoEnemigo = new Mokepon("Capipepo", './images/chaco.jpg', 5, './images/chaco.jpg', 120, 450)
-let ratigueyaEnemigo = new Mokepon("Ratigueya", './images/Emo.jpg', 5, './images/Emo.jpg', 700, 470)
+let hipodogeEnemigo = new Mokepon("Hipodoge", './images/Alma.png', 5, './images/Alma.png')
+let capipepoEnemigo = new Mokepon("Capipepo", './images/chaco.jpg', 5, './images/chaco.jpg')
+let ratigueyaEnemigo = new Mokepon("Ratigueya", './images/Emo.jpg', 5, './images/Emo.jpg')
 
 
 
@@ -456,8 +467,7 @@ function detenerMovimiento() {
 }
 
 function iniciarMapa() {
-    mapa.width = 800
-    mapa.height = 600
+ 
     mascotaJugadorObjeto = obtenerObjetoMascota()
     intervalo = setInterval(pintarCanvas, 50)
     moverMiMokepon()
