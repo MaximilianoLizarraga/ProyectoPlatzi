@@ -98,6 +98,14 @@ hipodoge.ataques.push(
     { nombre: '🌱', id: 'boton-tierra' },
 )
 
+hipodogeEnemigo.ataques.push(
+    { nombre: '💧', id: 'boton-agua' },
+    { nombre: '💧', id: 'boton-agua' },
+    { nombre: '💧', id: 'boton-agua' },
+    { nombre: '🔥', id: 'boton-fuego' },
+    { nombre: '🌱', id: 'boton-tierra' },
+)
+
 capipepo.ataques.push(
     { nombre: '🌱', id: 'boton-tierra' },
     { nombre: '🌱', id: 'boton-tierra' },
@@ -106,7 +114,23 @@ capipepo.ataques.push(
     { nombre: '💧', id: 'boton-agua' },
 )
 
+capipepoEnemigo.ataques.push(
+    { nombre: '🌱', id: 'boton-tierra' },
+    { nombre: '🌱', id: 'boton-tierra' },
+    { nombre: '🌱', id: 'boton-tierra' },
+    { nombre: '🔥', id: 'boton-fuego' },
+    { nombre: '💧', id: 'boton-agua' },
+)
+
 ratigueya.ataques.push(
+    { nombre: '🔥', id: 'boton-fuego' },
+    { nombre: '🔥', id: 'boton-fuego' },
+    { nombre: '🔥', id: 'boton-fuego' },
+    { nombre: '💧', id: 'boton-agua' },
+    { nombre: '🌱', id: 'boton-tierra' },
+)
+
+ratigueyaEnemigo.ataques.push(
     { nombre: '🔥', id: 'boton-fuego' },
     { nombre: '🔥', id: 'boton-fuego' },
     { nombre: '🔥', id: 'boton-fuego' },
@@ -176,7 +200,6 @@ function seleccionarMascotaJugador() {
     // funcion explicada mas abajo
     sectionVerMapa.style.display = "flex"
     iniciarMapa()
-    seleccionarMascotaEnemigo()
 
 }
 
@@ -206,17 +229,14 @@ function secuenciaAtaque() {
         boton.addEventListener("click", (e) => {
             if (e.target.textContent === "🔥") {
                 ataqueJugador.push("FUEGO")
-                console.log(ataqueJugador)
                 boton.style.background = "#112f58"
                 boton.disabled = true
             } else if (e.target.textContent === "💧") {
                 ataqueJugador.push("AGUA")
-                console.log(ataqueJugador)
                 boton.style.background = "#112f58"
                 boton.disabled = true
             } else {
                 ataqueJugador.push("TIERRA")
-                console.log(ataqueJugador)
                 boton.style.background = "#112f58"
                 boton.disabled = true
             }
@@ -230,11 +250,10 @@ function secuenciaAtaque() {
 
 // funcion de aleatoriedad de seleccion de mascota del enemigo 
 
-function seleccionarMascotaEnemigo() {
-    let mascotaAleatorio = aleatorio(0, mokepones.length - 1)
+function seleccionarMascotaEnemigo(enemigo) {
 
-    spanMascotaEnemigo.innerHTML = mokepones[mascotaAleatorio].nombre
-    ataquesMokeponEnemigo = mokepones[mascotaAleatorio].ataques
+    spanMascotaEnemigo.innerHTML = enemigo.nombre
+    ataquesMokeponEnemigo = enemigo.ataques
     secuenciaAtaque()
 }
 
@@ -370,7 +389,6 @@ function pintarCanvas() {
         revisarColision(ratigueyaEnemigo)
         revisarColision(capipepoEnemigo)
     }
-
 }
 
 function moverMiMokepon() {
@@ -398,7 +416,7 @@ function moverMiMokepon() {
             }
 
         })
-        
+
     })
     pintarCanvas()
 }
@@ -445,7 +463,7 @@ function iniciarMapa() {
     moverMiMokepon()
     window.addEventListener("keydown", sePresionoUnaTecla)
     window.addEventListener("keyup", detenerMovimiento)
-    
+
 }
 
 function obtenerObjetoMascota() {
@@ -462,13 +480,13 @@ function revisarColision(enemigo) {
     const abajoEnemigo = enemigo.y + enemigo.alto
     const derechaEnemigo = enemigo.x + enemigo.ancho
     const izquierdaEnemigo = enemigo.x
-    
+
 
     const arribaMascota = mascotaJugadorObjeto.y
     const abajoMascota = mascotaJugadorObjeto.y + mascotaJugadorObjeto.alto
     const derechaMascota = mascotaJugadorObjeto.x + mascotaJugadorObjeto.ancho
     const izquierdaMascota = mascotaJugadorObjeto.x
-    
+
 
     if (
         abajoMascota < arribaEnemigo || arribaMascota > abajoEnemigo || derechaMascota < izquierdaEnemigo || izquierdaMascota > derechaEnemigo
@@ -476,7 +494,10 @@ function revisarColision(enemigo) {
         return
     }
     detenerMovimiento()
-    alert("Hay colision " + enemigo.nombre)
+    clearInterval(intervalo)
+    sectionSeleccionAtaque.style.display = "flex"
+    sectionVerMapa.style.display = "none"
+    seleccionarMascotaEnemigo(enemigo)
 }
 
 
