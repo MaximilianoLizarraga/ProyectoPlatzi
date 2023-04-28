@@ -121,6 +121,22 @@ input:checked+label {
 
 #teclasMov {
     display: flex;
+    margin: 5px;
+}
+
+
+#moverArriba {
+    margin-top: 5px;
+}
+
+
+#ver-mapa button {
+    width: 180px;
+    height: 40px;
+    border-radius: 20px;
+    background: transparent;
+    border: 2px solid white;
+    color: white;
 }
 
 

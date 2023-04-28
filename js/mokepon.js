@@ -460,10 +460,10 @@ function detenerMovimiento() {
     mascotaJugadorObjeto
     mascotaJugadorObjeto.velocidadX = 0
     mascotaJugadorObjeto.velocidadY = 0
-    botonDerecho.style.background = "#FFFFFF"
-    botonAbajo.style.background = "#FFFFFF"
-    botonIzquierda.style.background = "#FFFFFF"
-    botonArriba.style.background = "#FFFFFF"
+    botonDerecho.style.background = "#041562"
+    botonAbajo.style.background = "#041562"
+    botonIzquierda.style.background = "#041562"
+    botonArriba.style.background = "#041562"
 }
 
 function iniciarMapa() {
