@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/MaximilianoLizarraga/ProyectoPlatzi/issues"
   },
-  "homepage": "https://github.com/MaximilianoLizarraga/ProyectoPlatzi#readme"
+  "homepage": "https://github.com/MaximilianoLizarraga/ProyectoPlatzi#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
 }
